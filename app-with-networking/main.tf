@@ -20,7 +20,8 @@ resource "openstack_networking_subnet_v2" "terraform" {
 resource "openstack_networking_router_v2" "terraform" {
   name                = "terraform"
   admin_state_up      = "true"
-  external_network_id = data.openstack_networking_network_v2.terraform.id
+  #external_network_id = data.openstack_networking_network_v2.terraform.id
+  external_network_id = "e31a49d9-f52e-4d4c-83e6-32543e91b09a"
 }
 
 resource "openstack_networking_router_interface_v2" "terraform" {

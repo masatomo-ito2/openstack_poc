@@ -17,5 +17,5 @@ variable "ssh_user_name" {
 }
 
 variable "pool" {
-  default = "public"
+  default = "test-net1"
 }

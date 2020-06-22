@@ -1,24 +1,25 @@
 resource "openstack_compute_keypair_v2" "terraform" {
-  name       = "terraform"
+  name       = "${var.prefix}-terraform"
   #public_key = "${file("${var.ssh_key_file}.pub")}"
   public_key = tls_private_key.ssh.public_key_openssh 
 }
 
 resource "openstack_networking_network_v2" "terraform" {
-  name           = "terraform"
+  name           = "${var.prefix}-terraform"
   admin_state_up = "true"
 }
 
 resource "openstack_networking_subnet_v2" "terraform" {
-  name            = "terraform"
+  name            = "${var.prefix}-terraform"
   network_id      = openstack_networking_network_v2.terraform.id
   cidr            = "10.0.0.0/24"
   ip_version      = 4
   dns_nameservers = ["8.8.8.8", "8.8.4.4"]
 }
 
+/*
 resource "openstack_networking_router_v2" "terraform" {
-  name                = "terraform"
+  name                = "${var.prefix}-terraform"
   admin_state_up      = "true"
   #external_network_id = data.openstack_networking_network_v2.terraform.id
   external_network_id = "e31a49d9-f52e-4d4c-83e6-32543e91b09a"
@@ -28,9 +29,10 @@ resource "openstack_networking_router_interface_v2" "terraform" {
   router_id = openstack_networking_router_v2.terraform.id
   subnet_id = openstack_networking_subnet_v2.terraform.id
 }
+*/
 
 resource "openstack_networking_secgroup_v2" "terraform" {
-  name        = "terraform"
+  name        = "${var.prefix}-terraform"
   description = "Security group for the Terraform example instances"
 }
 
@@ -67,7 +69,7 @@ resource "openstack_networking_floatingip_v2" "terraform" {
 }
 
 resource "openstack_compute_instance_v2" "terraform" {
-  name            = "terraform"
+  name            = "${var.prefix}-terraform"
   image_name      = var.image
   flavor_name     = var.flavor
   key_pair        = openstack_compute_keypair_v2.terraform.name

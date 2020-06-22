@@ -19,3 +19,7 @@ variable "ssh_user_name" {
 variable "pool" {
   default = "test-net1"
 }
+
+variable "prefix" {
+	default = "demo"
+}

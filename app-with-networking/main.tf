@@ -75,12 +75,21 @@ resource "openstack_compute_instance_v2" "terraform" {
   network {
     uuid = openstack_networking_network_v2.terraform.id
   }
+
+	# XXX: added
+	user_data = <<-EOT
+      sudo apt-get -y update
+      sudo apt-get -y install nginx
+      sudo service nginx start
+EOT
+
 }
 
 resource "openstack_compute_floatingip_associate_v2" "terraform" {
   floating_ip = openstack_networking_floatingip_v2.terraform.address
   instance_id = openstack_compute_instance_v2.terraform.id
 
+/*
   provisioner "remote-exec" {
     connection {
       host        = openstack_networking_floatingip_v2.terraform.address
@@ -95,4 +104,5 @@ resource "openstack_compute_floatingip_associate_v2" "terraform" {
       "sudo service nginx start",
     ]
   }
+*/
 }

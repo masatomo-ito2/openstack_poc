@@ -17,19 +17,16 @@ resource "openstack_networking_subnet_v2" "terraform" {
   dns_nameservers = ["8.8.8.8", "8.8.4.4"]
 }
 
-/*
 resource "openstack_networking_router_v2" "terraform" {
   name                = "${var.prefix}-terraform"
   admin_state_up      = "true"
-  #external_network_id = data.openstack_networking_network_v2.terraform.id
-  external_network_id = "e31a49d9-f52e-4d4c-83e6-32543e91b09a"
+  external_network_id = data.openstack_networking_network_v2.terraform.id
 }
 
 resource "openstack_networking_router_interface_v2" "terraform" {
   router_id = openstack_networking_router_v2.terraform.id
   subnet_id = openstack_networking_subnet_v2.terraform.id
 }
-*/
 
 resource "openstack_networking_secgroup_v2" "terraform" {
   name        = "${var.prefix}-terraform"

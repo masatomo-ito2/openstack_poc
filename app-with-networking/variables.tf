@@ -21,5 +21,5 @@ variable "pool" {
 }
 
 variable "prefix" {
-	default = "demo-local"
+  default = "demo-local"
 }

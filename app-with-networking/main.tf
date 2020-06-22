@@ -1,7 +1,7 @@
 resource "openstack_compute_keypair_v2" "terraform" {
-  name       = "${var.prefix}-terraform"
+  name = "${var.prefix}-terraform"
   #public_key = "${file("${var.ssh_key_file}.pub")}"
-  public_key = tls_private_key.ssh.public_key_openssh 
+  public_key = tls_private_key.ssh.public_key_openssh
 }
 
 resource "openstack_networking_network_v2" "terraform" {
@@ -76,15 +76,15 @@ resource "openstack_compute_instance_v2" "terraform" {
     uuid = openstack_networking_network_v2.terraform.id
   }
 
-	# XXX: added
-	user_data = <<-EOT
+  # XXX: added
+  user_data = <<-EOT
 			#! /bin/bash
 
 			echo "Provisioned from Terraform Cloud" > ~/proof.txt"
-      sudo apt-get -y update
-      sudo apt-get -y install nginx
-      sudo service nginx start
-EOT
+			sudo apt-get -y update
+			sudo apt-get -y install nginx
+			sudo service nginx start
+	EOT
 
 }
 
@@ -92,7 +92,7 @@ resource "openstack_compute_floatingip_associate_v2" "terraform" {
   floating_ip = openstack_networking_floatingip_v2.terraform.address
   instance_id = openstack_compute_instance_v2.terraform.id
 
-/*
+  /*
   provisioner "remote-exec" {
     connection {
       host        = openstack_networking_floatingip_v2.terraform.address

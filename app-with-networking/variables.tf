@@ -1,5 +1,5 @@
 variable "image" {
-  default = "Ubuntu 14.04"
+  default = "ubuntu-18.04"
 }
 
 variable "flavor" {
@@ -17,9 +17,9 @@ variable "ssh_user_name" {
 }
 
 variable "pool" {
-  default = "test-net1"
+  default = "public-floating-net"
 }
 
 variable "prefix" {
-	default = "demo"
+	default = "demo-local"
 }

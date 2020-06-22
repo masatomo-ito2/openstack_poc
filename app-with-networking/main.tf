@@ -78,6 +78,9 @@ resource "openstack_compute_instance_v2" "terraform" {
 
 	# XXX: added
 	user_data = <<-EOT
+			#! /bin/bash
+
+			echo "Provisioned from Terraform Cloud" > ~/proof.txt"
       sudo apt-get -y update
       sudo apt-get -y install nginx
       sudo service nginx start

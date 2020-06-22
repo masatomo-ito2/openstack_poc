@@ -25,9 +25,11 @@ variable "instance_count" {
   default = 2
 }
 
+/*
 variable "network_name" {
   default = "my-network"
 }
+*/
 
 variable "instance_prefix" {
   default = "multi"
